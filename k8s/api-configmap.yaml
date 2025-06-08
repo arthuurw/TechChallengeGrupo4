@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: contatos-api-config
+  labels:
+    app: contatos-grupo4
+    tier: api
+  annotations:
+    description: Configuracoes da API de Contatos
+
+data:
+  SqlServer__ConnectionString: "Server=mssql-service,1433;Database=FIAP;User ID=sa;Password=1q2w3e4r@#$;TrustServerCertificate=True"
+  RabbitMQ__HostName: "rabbitmq"
+  RabbitMQ__UserName: "guest"
+  RabbitMQ__Password: "guest"

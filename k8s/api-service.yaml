@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: contatos-api-service
+  labels:
+    app: contatos-grupo4
+spec:
+  selector:
+    app: contatos-grupo4
+    tier: api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
