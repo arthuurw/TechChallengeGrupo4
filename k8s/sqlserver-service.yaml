@@ -5,11 +5,13 @@ metadata:
   labels:
     app: contatos-grupo4
 spec:
+  type: NodePort
   selector:
     app: contatos-grupo4
     tier: database
   ports:
-  - protocol: TCP
-    port: 1433
-    targetPort: 1433
-  clusterIP: None
+    - name: sql
+      protocol: TCP
+      port: 1433
+      targetPort: 1433
+      nodePort: 30007

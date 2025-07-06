@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+data:
+  definitions.json: |
+    {
+      "users": [
+        {
+          "name": "guest",
+          "password": "guest",
+          "tags": "administrator"
+        }
+      ],
+      "vhosts": [
+        {
+          "name": "/"
+        }
+      ],
+      "permissions": [
+        {
+          "user": "guest",
+          "vhost": "/",
+          "configure": ".*",
+          "write": ".*",
+          "read": ".*"
+        }
+      ],
+      "queues": [
+        {
+          "name": "contato-criar-queue",
+          "vhost": "/",
+          "durable": true
+        },
+        {
+          "name": "contato-atualizar-queue",
+          "vhost": "/",
+          "durable": true
+        },
+        {
+          "name": "contato-excluir-queue",
+          "vhost": "/",
+          "durable": true
+        }
+      ]
+    }
