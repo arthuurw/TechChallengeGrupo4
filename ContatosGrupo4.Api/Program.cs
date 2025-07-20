@@ -21,6 +21,8 @@ builder.Services.AddOptions<RabbitMQOptions>().BindConfiguration("RabbitMQ");
 
 builder.Services.AddHostedService<ContatoConsumerService>();
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,6 +36,8 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseHttpMetrics();
 app.MapMetrics();
+
+app.MapHealthChecks("/health");
 
 app.Run();
 

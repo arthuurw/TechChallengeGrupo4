@@ -7,7 +7,9 @@ metadata:
     app: contatos-grupo4
     tier: api
   annotations:
-    owner.team: "backend"
+    maintainer: "Grupo4"
+    version: "v1"
+    description: "API de Contatos gerenciada via Kubernetes"
     prometheus.io/scrape: "true"
 spec:
   replicas: 2
@@ -22,7 +24,11 @@ spec:
         tier: api
     spec:
       containers:
-      - name: contatos-api
-        image: contatos-api:latest
-        ports:
-        - containerPort: 80
+        - name: contatos-api
+          image: contatos-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: contatos-api-config

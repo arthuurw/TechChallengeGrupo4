@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,15 +12,22 @@ spec:
       labels:
         app: prometheus
     spec:
+      serviceAccountName: prometheus
       containers:
-      - name: prometheus
-        image: prom/prometheus
-        args:
-          - "--config.file=/etc/prometheus/prometheus.yml"
-        volumeMounts:
-          - name: prometheus-storage
-            mountPath: /prometheus
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/prometheus
+            - name: prometheus-storage
+              mountPath: /prometheus
       volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-config
         - name: prometheus-storage
           persistentVolumeClaim:
             claimName: prometheus-pvc
+            
